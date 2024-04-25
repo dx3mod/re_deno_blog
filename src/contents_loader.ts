@@ -1,15 +1,4 @@
-import {
-  front_matter,
-  fs,
-  parseYaml,
-  path,
-  Post,
-  removeMarkdown,
-} from "../deps.ts";
-
-const extract = front_matter.createExtractor({
-  yaml: parseYaml as front_matter.Parser,
-});
+import { extractFrontMatter, fs, path, Post, removeMarkdown } from "../deps.ts";
 
 export default async function loadContents(rootDir: string) {
   const posts = [];
@@ -22,7 +11,7 @@ export default async function loadContents(rootDir: string) {
 }
 
 async function loadPost(pathname: string): Promise<Post> {
-  const parsed = extract(await Deno.readTextFile(pathname));
+  const parsed = extractFrontMatter(await Deno.readTextFile(pathname));
 
   const publishDate = parsed.attrs?.publish_date
     ? new Date(parsed.attrs["publish_date"] as string)

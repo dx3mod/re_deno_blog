@@ -7,9 +7,7 @@ export { Hono } from "https://deno.land/x/hono@v4.2.4/mod.ts";
 export * as middlewares from "https://deno.land/x/hono@v4.2.4/middleware.ts";
 export { jsx } from "https://deno.land/x/hono@v4.2.4/middleware.ts";
 
-// export * as unocss from "npm:unocss"
-export * as front_matter from "jsr:@std/front-matter";
-export { parse as parseYaml } from "jsr:@std/yaml/parse";
+export { extract as extractFrontMatter } from "https://deno.land/std@0.224.0/front_matter/any.ts";
 
 export * as path from "jsr:@std/path";
 export * as fs from "jsr:@std/fs";

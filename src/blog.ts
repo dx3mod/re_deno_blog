@@ -37,7 +37,13 @@ export class Blog {
     }
 
     const indexPage = page({
-      element: IndexPage({ settings: this.settings, posts }),
+      element: IndexPage({
+        settings: this.settings,
+        posts: posts.sort(
+          (a, b) =>
+            (b.publishDate?.getTime() ?? 0) - (a.publishDate?.getTime() ?? 0),
+        ),
+      }),
       settings: this.settings,
       title: this.settings.title ?? "My blog",
     }).toString();

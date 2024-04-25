@@ -20,10 +20,10 @@ export function page({ element, settings, title }: PageOptions) {
           rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/@unocss/reset/tailwind.min.css"
         />
+        <script src="https://cdn.jsdelivr.net/npm/@unocss/runtime/uno.global.js" />
       </head>
       <body>
         {element}
-        <script src="https://cdn.jsdelivr.net/npm/@unocss/runtime/uno.global.js" />
       </body>
     </html>
   );
