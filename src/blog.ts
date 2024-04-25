@@ -1,6 +1,5 @@
-import { type BlogSettings, Hono, middlewares, Post } from "../deps.ts";
+import { type BlogSettings, fs, Hono, middlewares } from "../deps.ts";
 
-import { existsSync } from "node:fs";
 import { page } from "./htm.tsx";
 import IndexPage from "./pages/Index.tsx";
 import loadContents from "./contents_loader.ts";
@@ -26,7 +25,7 @@ export class Blog {
       app.use(middlewares.logger());
     }
 
-    if (existsSync("static/")) {
+    if (fs.existsSync("static/")) {
       app.use(middlewares.serveStatic({ root: "static/" }));
     } else if (this.options?.dev) {
       console.log("Not found 'static/' directory!");
