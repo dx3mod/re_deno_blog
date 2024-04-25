@@ -1,11 +1,12 @@
-import { type BlogSettings, Hono, middlewares } from "../deps.ts";
+import { type BlogSettings, Hono, middlewares, Post } from "../deps.ts";
 
 import { existsSync } from "node:fs";
 import { page } from "./htm.tsx";
 import IndexPage from "./pages/Index.tsx";
+import loadContents from "./contents_loader.ts";
 
 export interface BlogOptions {
-  log?: boolean;
+  dev?: boolean;
 }
 
 export class Blog {
@@ -14,18 +15,20 @@ export class Blog {
     private readonly options?: BlogOptions,
   ) {}
 
-  honoApp(): Hono {
+  async honoApp(): Promise<Hono> {
     const app = new Hono();
+
+    const posts = await loadContents("posts");
 
     app.use("*", middlewares.etag({ weak: true }));
 
-    if (this.options?.log) {
+    if (this.options?.dev) {
       app.use(middlewares.logger());
     }
 
     if (existsSync("static/")) {
       app.use(middlewares.serveStatic({ root: "static/" }));
-    } else if (this.options?.log) {
+    } else if (this.options?.dev) {
       console.log("Not found 'static/' directory!");
     }
 
@@ -34,7 +37,7 @@ export class Blog {
     }
 
     const indexPage = page({
-      element: IndexPage({ settings: this.settings }),
+      element: IndexPage({ settings: this.settings, posts }),
       settings: this.settings,
       title: this.settings.title ?? "My blog",
     }).toString();
@@ -56,9 +59,9 @@ export class Blog {
   }
 }
 
-export function blog(settings: BlogSettings, options?: BlogOptions) {
+export async function blog(settings: BlogSettings, options?: BlogOptions) {
   return Deno.serve({
     port: settings.port,
     hostname: settings.hostname,
-  }, new Blog(settings, options).honoApp().fetch);
+  }, (await new Blog(settings, options).honoApp()).fetch);
 }
