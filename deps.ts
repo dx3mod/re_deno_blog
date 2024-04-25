@@ -9,8 +9,8 @@ export { jsx } from "https://deno.land/x/hono@v4.2.4/middleware.ts";
 
 export { extract as extractFrontMatter } from "https://deno.land/std@0.224.0/front_matter/any.ts";
 
-export * as path from "jsr:@std/path";
-export * as fs from "jsr:@std/fs";
+export * as path from "https://deno.land/std@0.223.0/path/mod.ts";
+export * as fs from "https://deno.land/std@0.223.0/fs/mod.ts";
 
 export { default as removeMarkdown } from "npm:remove-markdown";
 
