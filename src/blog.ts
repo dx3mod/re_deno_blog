@@ -5,7 +5,7 @@ import { page } from "./htm.tsx";
 import IndexPage from "./pages/Index.tsx";
 import loadContents from "./contents_loader.ts";
 
-export interface BlogOptions {
+interface BlogOptions {
   dev?: boolean;
 }
 
@@ -65,7 +65,13 @@ export class Blog {
   }
 }
 
-export async function blog(settings: BlogSettings, options?: BlogOptions) {
+export async function blog(settings: BlogSettings) {
+  const options: BlogOptions = {};
+
+  if (Deno.args.includes("--dev")) {
+    options.dev = true;
+  }
+
   return Deno.serve({
     port: settings.port,
     hostname: settings.hostname,

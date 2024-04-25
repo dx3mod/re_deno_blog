@@ -4,4 +4,4 @@ blog({
   title: "me",
   description: "perfect blog",
   avatar: "https://deno-avatar.deno.dev/avatar/blog.svg",
-}, { dev: true });
+});
