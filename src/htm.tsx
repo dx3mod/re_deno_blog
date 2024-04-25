@@ -1,6 +1,10 @@
 /** @jsx jsx */
 
-import { BlogSettings, jsx } from "../deps.ts";
+import { BlogSettings, jsx, unocss } from "../deps.ts";
+
+const Uno = new unocss.UnoGenerator({
+  presets: [unocss.presetUno()],
+});
 
 export interface PageOptions {
   settings: BlogSettings;
@@ -9,7 +13,10 @@ export interface PageOptions {
   title: string;
 }
 
-export function page({ element, settings, title }: PageOptions) {
+export async function page({ element, settings, title }: PageOptions) {
+  const bodyHtml = element.toString();
+  const { css } = await Uno.generate(bodyHtml);
+
   return (
     <html lang={settings.lang}>
       <head>
@@ -20,10 +27,10 @@ export function page({ element, settings, title }: PageOptions) {
           rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/@unocss/reset/tailwind.min.css"
         />
-        <script src="https://cdn.jsdelivr.net/npm/@unocss/runtime/uno.global.js" />
+        <style dangerouslySetInnerHTML={{ __html: css }} />
+        {/* <script src="https://cdn.jsdelivr.net/npm/@unocss/runtime/uno.global.js" /> */}
       </head>
-      <body>
-        {element}
+      <body dangerouslySetInnerHTML={{ __html: bodyHtml }}>
       </body>
     </html>
   );

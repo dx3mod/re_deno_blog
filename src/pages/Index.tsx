@@ -19,7 +19,7 @@ export default function IndexPage(
             {settings.description}
           </p>
 
-          <nav class="mt-3 flex gap-2"></nav>
+          {settings.links && <nav class="mt-3 flex gap-2"></nav>}
         </div>
       </header>
 

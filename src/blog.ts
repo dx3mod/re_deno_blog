@@ -46,7 +46,7 @@ export class Blog {
       }),
       settings: this.settings,
       title: this.settings.title ?? "My blog",
-    }).toString();
+    });
 
     app.get("/", (c) => c.html(indexPage));
 
