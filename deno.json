@@ -1,0 +1,13 @@
+{
+  "name": "@dx3mod/re-deno-blog",
+  "version": "0.1.0",
+  "exports": "./mod.ts",
+  "publish": {
+    "include": [
+      "src"
+    ],
+    "exclude": [
+      "preview"
+    ]
+  }
+}
