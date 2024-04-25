@@ -1,9 +1,9 @@
 /** @jsx jsx */
 
-import { BlogSettings, jsx, unocss } from "../deps.ts";
+import { BlogSettings, jsx, presetWind, UnoGenerator } from "../deps.ts";
 
-const Uno = new unocss.UnoGenerator({
-  presets: [unocss.presetUno()],
+const Uno = new UnoGenerator({
+  presets: [presetWind()],
 });
 
 export interface PageOptions {

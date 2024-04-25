@@ -14,4 +14,5 @@ export * as fs from "https://deno.land/std@0.223.0/fs/mod.ts";
 
 export { default as removeMarkdown } from "npm:remove-markdown";
 
-export * as unocss from "npm:unocss";
+export { UnoGenerator } from "https://esm.sh/@unocss/core@0.59.4";
+export { presetWind } from "https://esm.sh/@unocss/preset-wind@0.59.4";
