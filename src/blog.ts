@@ -1,6 +1,8 @@
 import { type BlogSettings, Hono, middlewares } from "../deps.ts";
 
 import { existsSync } from "node:fs";
+import { page } from "./htm.tsx";
+import IndexPage from "./pages/Index.tsx";
 
 export interface BlogOptions {
   log?: boolean;
@@ -14,6 +16,8 @@ export class Blog {
 
   honoApp(): Hono {
     const app = new Hono();
+
+    app.use("*", middlewares.etag({ weak: true }));
 
     if (this.options?.log) {
       app.use(middlewares.logger());
@@ -29,7 +33,13 @@ export class Blog {
       app.get("/favicon.ico", this.staticFavicon());
     }
 
-    app.get("/", (c) => c.text("hello"));
+    const indexPage = page({
+      element: IndexPage({ settings: this.settings }),
+      settings: this.settings,
+      title: this.settings.title ?? "My blog",
+    }).toString();
+
+    app.get("/", (c) => c.html(indexPage));
 
     return app;
   }
