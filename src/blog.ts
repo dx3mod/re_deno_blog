@@ -1,8 +1,9 @@
-import { type BlogSettings, fs, Hono, middlewares } from "../deps.ts";
+import { fs, Hono, middlewares } from "../deps.ts";
 
 import { page } from "./htm.tsx";
 import IndexPage from "./pages/Index.tsx";
 import loadContents from "./contents_loader.ts";
+import { BlogSettings } from "./types.ts";
 
 interface BlogOptions {
   dev?: boolean;

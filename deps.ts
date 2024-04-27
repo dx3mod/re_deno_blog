@@ -1,5 +1,5 @@
 export type {
-  BlogSettings,
+  BlogSettings as BaseBlogSettings,
   Post,
 } from "https://deno.land/x/blog@0.7.0/types.d.ts";
 

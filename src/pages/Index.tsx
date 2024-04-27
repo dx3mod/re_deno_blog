@@ -1,7 +1,8 @@
 /** @jsx jsx */
 
-import { BlogSettings, jsx, Post } from "../../deps.ts";
+import { jsx, Post } from "../../deps.ts";
 import SocialLink, { SocialLinkProps } from "../components/SocialLink.tsx";
+import { BlogSettings } from "../types.ts";
 
 export default function IndexPage(
   { settings, posts }: { settings: BlogSettings; posts: Post[] },
@@ -31,7 +32,11 @@ export default function IndexPage(
       </header>
 
       <div class="max-w-screen-sm px-6 mx-auto">
-        <div class="pt-16 lt-sm:pt-12 border-t-1 border-gray-300/80">
+        <div
+          class={settings.custom?.indexPage?.splitLine === false
+            ? ""
+            : "pt-16 lt-sm:pt-12 border-t-1 border-gray-300/80"}
+        >
           {posts.map((post) => <PostCard post={post} />)}
         </div>
 

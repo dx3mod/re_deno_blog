@@ -10,4 +10,10 @@ blog({
     { title: "GitHub", url: "https://github.com/dx3mod" },
     { title: "Telegram", url: "https://t.me/dx3mod" },
   ],
+
+  custom: {
+    indexPage: {
+      splitLine: false,
+    },
+  },
 });
