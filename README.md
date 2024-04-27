@@ -23,3 +23,11 @@ To run
 ```console
 $ deno run --allow-net --allow-read=posts main.ts
 ```
+
+## Preview
+
+Clone the repository. Go to `preview` directory and run command:
+
+```console
+$ deno task dev
+```
