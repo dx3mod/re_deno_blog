@@ -1,6 +1,7 @@
 /** @jsx jsx */
 
 import { BlogSettings, jsx, Post } from "../../deps.ts";
+import SocialLink, { SocialLinkProps } from "../components/SocialLink.tsx";
 
 export default function IndexPage(
   { settings, posts }: { settings: BlogSettings; posts: Post[] },
@@ -19,7 +20,13 @@ export default function IndexPage(
             {settings.description}
           </p>
 
-          {settings.links && <nav class="mt-3 flex gap-2"></nav>}
+          {settings.links && (
+            <nav class="mt-3 flex gap-2">
+              {settings.links.map((link) =>
+                SocialLink(link as SocialLinkProps)
+              )}
+            </nav>
+          )}
         </div>
       </header>
 
