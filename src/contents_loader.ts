@@ -17,16 +17,16 @@ async function loadPost(pathname: string): Promise<Post> {
     ? new Date(parsed.attrs["publish_date"] as string)
     : new Date();
 
-  const snippet = parsed.attrs?.snippet ??
-    cropSnippet(parsed.body);
+  const snippet = parsed.attrs?.snippet ?? cropSnippet(parsed.body);
 
   return {
     pathname,
-    title: parsed.attrs?.title as string ?? path.basename(pathname),
+    title: (parsed.attrs?.title as string) ?? path.basename(pathname),
     markdown: parsed.body,
     publishDate,
     readTime: 0,
     snippet,
+    tags: parsed.attrs?.tags as string[],
   };
 }
 

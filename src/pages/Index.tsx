@@ -2,6 +2,7 @@
 
 import { jsx, Post } from "../../deps.ts";
 import SocialLink, { SocialLinkProps } from "../components/SocialLink.tsx";
+import Tags from "../components/Tags.tsx";
 import { BlogSettings } from "../types.ts";
 
 export default function IndexPage(
@@ -56,7 +57,7 @@ function PostCard(
           {post.title}
         </a>
       </h3>
-      {/* <Tags tags={post.tags} /> */}
+      <Tags tags={post.tags} />
       <p class="text-gray-500/80">
         {post.author && <span>{post.author} {" "}</span>}
         {}
